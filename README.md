@@ -31,7 +31,7 @@ config :ex_aws,
 After that Configure your `config.exs` like this.
 
 ```elixir
-config :cdn,  bucket: "",
+config :cdn,  bucket: "myassets.bucket",
               include: [
                 directories: ["priv/static", "public/bin"],
                 patterns: ["**/*", "**/*.css"],
