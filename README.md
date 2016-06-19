@@ -1,5 +1,6 @@
 # Elixir CDN Assets Manager
 
+[![Build Status](https://travis-ci.org/shufo/cdn.svg?branch=master)](https://travis-ci.org/shufo/cdn)
 [![hex.pm version](https://img.shields.io/hexpm/v/cdn.svg)](https://hex.pm/packages/cdn)
 [![hex.pm](https://img.shields.io/hexpm/l/cdn.svg)](https://github.com/shufo/cdn/blob/master/LICENSE)
 
