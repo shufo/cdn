@@ -9,11 +9,11 @@ Inspired by [Vinelab/cdn](https://github.com/Vinelab/cdn).
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
-  1. Add cdn to your list of dependencies in `mix.exs`:
+1. Add cdn to your list of dependencies in `mix.exs`:
 
-        ```elixir
-        {:cdn, "~> 0.0.1"}
-        ```
+```elixir
+{:cdn, "~> 0.0.1"}
+```
 
 ## Configuration
 
@@ -92,14 +92,12 @@ then you can load static file like this.
 
 ```elixir
 <%= cdn(static_path(@conn, "/css/app.css")) %>
-# or
-<%= static_path(@conn, "/css/app.css") |> cdn %>
 
 # MIX_ENV=dev
 <%= cdn(static_path(@conn, "/css/app.css")) %> #=> "/css/app.css"
 
 # MIX_ENV=prod
- <%= cdn(static_path(@conn, "/css/app.css")) %> #=> "https://assets.cloudfront.net/css/app.css"
+<%= cdn(static_path(@conn, "/css/app.css")) %> #=> "https://assets.cloudfront.net/css/app.css"
 ```
 
 ## Contributing
