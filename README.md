@@ -85,7 +85,7 @@ def view do
   quote do
     ...
     # Import CDN helper
-    import Cdn.Helper
+    import Cdn.Helpers
     ...
   end
 end
