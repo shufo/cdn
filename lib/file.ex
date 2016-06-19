@@ -10,10 +10,10 @@ defmodule Cdn.File do
     iex> Application.put_env(:cdn, :include, [directories: ["test/fixtures"], patterns: ["**/*"]])
     ...> Application.put_env(:cdn, :exclude, [directories: []])
     ...> Cdn.File.list_files_in_local
-    ["test/fixtures/mtime.txt": %{mtime: 1466371789,
+    ["test/fixtures/mtime.txt": %{mtime: Cdn.File.mtime("test/fixtures/mtime.txt"),
               original: "test/fixtures/mtime.txt",
               path: "mtime.txt", size: 5},
-            "test/fixtures/sub/test.txt": %{mtime: 1466371789,
+            "test/fixtures/sub/test.txt": %{mtime: Cdn.File.mtime("test/fixtures/sub/test.txt"),
               original: "test/fixtures/sub/test.txt",
               path: "sub/test.txt", size: 7}]
 
@@ -188,7 +188,7 @@ defmodule Cdn.File do
     iex> Application.put_env(:cdn, :include, [directories: ["test/fixtures"], patterns: ["**/*"]])
     ...> Cdn.File.file_stat("test/fixtures/mtime.txt")
     %{path: "mtime.txt", original: "test/fixtures/mtime.txt",
-      mtime: 1466371789, size: 5}
+      mtime: Cdn.File.mtime("test/fixtures/mtime.txt"), size: 5}
 
   """
   def file_stat(path) do
@@ -229,7 +229,7 @@ defmodule Cdn.File do
   ## Examples
 
     iex> Cdn.File.mtime("test/fixtures/mtime.txt")
-    1466371789
+    Cdn.File.mtime("test/fixtures/mtime.txt")
 
   """
   def mtime(path) do
