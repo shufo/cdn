@@ -1,5 +1,8 @@
 # Elixir CDN Assets Manager
 
+[![hex.pm version](https://img.shields.io/hexpm/v/cdn.svg)](https://hex.pm/packages/cdn)
+[![hex.pm](https://img.shields.io/hexpm/l/cdn.svg)](https://github.com/shufo/cdn/blob/master/LICENSE)
+
 ### Content Delivery Network Package for Elixir/Phoenix.
 
 This package provides the developer the ability to upload assets to a CDN with single mix command.  
