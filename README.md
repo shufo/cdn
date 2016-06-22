@@ -9,6 +9,10 @@
 This package provides the developer the ability to upload assets to a CDN with single mix command.  
 Inspired by [Vinelab/cdn](https://github.com/Vinelab/cdn).
 
+## Overview
+
+<img src="https://raw.githubusercontent.com/wiki/shufo/cdn/img/upload.gif" width="600">
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
