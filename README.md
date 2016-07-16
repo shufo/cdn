@@ -23,15 +23,40 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 Firstly this package is relies on [ex_aws](https://github.com/CargoSense/ex_aws) then setting `ex_aws` before configuration.
 
+`:ex_aws` must always be added to your applications list.
+
+```elixir
+def application do
+  [applications: [:ex_aws, :httpoison, :poison]]
+end
+```
+
+Export your AWS access key ID and Secret to your environmet variable(recommend)
+
+```
+export AWS_ACCESS_KEY_ID=your_access_key_id
+export AWS_SECRET_ACCESS_KEY=your_secret_access_key
+```
+
+or set config in mix.exs.
+
+```elixir
+config :ex_aws,
+  access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
+  secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role]
+```
+
+and set your region.
+
 ```elixir
 config :ex_aws,
   region: "us-east-1"
 ```
 
-After that Configure your `config.exs` like this.
+After that Configure `:cdn` in `config.exs`.(Example)
 
 ```elixir
-config :cdn,  bucket: "",
+config :cdn,  bucket: "assets.foo",
               include: [
                 directories: ["priv/static", "public/bin"],
                 patterns: ["**/*", "**/*.css"],
@@ -46,6 +71,8 @@ config :cdn,  bucket: "",
               cloudfront_url: "https://asset.s3.amazonaws.com",
               bypass: false
 ```
+
+This means it should be include files matched pattern `**/*` or `**/*.css` in `priv/static` or `public/bin`. Also includes hidden files(filename starts with `.`). And base url for asset helper is `https://asset.s3.amazonaws.com`, but always outputs local file url for asset helper because `bypass` is false.   
 
 - `bucket`: A bucket name of s3
 - `include`: Setting for upload target
