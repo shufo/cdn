@@ -1,7 +1,7 @@
 defmodule Cdn.Mixfile do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.0.2"
 
   def project do
     [app: :cdn,
@@ -21,9 +21,10 @@ defmodule Cdn.Mixfile do
   defp deps do
     [
       {:ex_aws,    "~> 0.4.10"},
-      {:poison,    "~> 1.2"},
+      {:poison,    "~> 1.2 or ~> 2.0"},
       {:httpoison, "~> 0.7"},
       {:sweet_xml, "~> 0.6.1"},
+      {:ex_doc, "~> 0.12", only: :dev},
     ]
   end
 
