@@ -15,7 +15,7 @@ defmodule Cdn.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :ex_aws, :httpoison]]
+    [applications: [:logger, :ex_aws, :httpoison, :mime, :calendar]]
   end
 
   defp deps do
@@ -25,6 +25,8 @@ defmodule Cdn.Mixfile do
       {:httpoison, "~> 0.7"},
       {:sweet_xml, "~> 0.6.1"},
       {:ex_doc, "~> 0.12", only: :dev},
+      {:mime, "~> 1.0"},
+      {:calendar, "~> 0.14.2"},
     ]
   end
 

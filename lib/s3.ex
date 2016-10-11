@@ -3,6 +3,7 @@ defmodule Cdn.S3 do
 
   require Logger
   import Cdn.Utils
+  import MIME, only: [from_path: 1]
 
   @doc """
     Lists all files in `bucket`.
@@ -33,7 +34,43 @@ defmodule Cdn.S3 do
   """
   def put_object({_, asset}, bucket) do
     Logger.info "Uploading file path: #{asset.path}"
-    ExAws.S3.put_object!(bucket, asset.path, File.read!(asset.original), s3_options)
+    ExAws.S3.put_object!(bucket, asset.path, File.read!(asset.original), object_headers(asset.path))
+  end
+
+  @doc ~S"""
+   Return mime type from file path
+
+  ## Examples
+
+    iex> Cdn.S3.object_headers("uploads/s3.jpg")
+    [
+      acl: Application.get_env(:cdn, :acl),
+      cache_control: Application.get_env(:cdn, :cache_control),
+      expires: Calendar.DateTime.now_utc
+              |> Calendar.DateTime.add!(Application.get_env(:cdn, :expires_after))
+              |> Calendar.DateTime.Format.httpdate,
+      content_type: "image/jpeg",
+    ]
+
+  """
+  def object_headers(path) do
+    Keyword.merge(s3_options, content_type: content_type(path))
+  end
+
+  @doc ~S"""
+   Return mime type from file path
+
+  ## Examples
+
+    iex> Cdn.S3.content_type("uploads/s3.jpg")
+    "image/jpeg"
+
+    iex> Cdn.S3.content_type("test/fixtures/mtime.txt")
+    "text/plain"
+
+  """
+  def content_type(path) do
+    from_path(path)
   end
 
   @doc """
@@ -87,12 +124,27 @@ defmodule Cdn.S3 do
   ## Examples
 
     iex> Cdn.S3.s3_options
-    [acl: Application.get_env(:cdn, :acl)]
+    [
+      acl: Application.get_env(:cdn, :acl),
+      cache_control: Application.get_env(:cdn, :cache_control),
+      expires: Calendar.DateTime.now_utc
+              |> Calendar.DateTime.add!(Application.get_env(:cdn, :expires_after))
+              |> Calendar.DateTime.Format.httpdate
+    ]
 
   """
   def s3_options do
     [
-      acl: Application.get_env(:cdn, :acl)
+      acl: Application.get_env(:cdn, :acl),
+      cache_control: Application.get_env(:cdn, :cache_control),
+      expires: expires
     ]
+  end
+
+  # Returns expires field in RFC2616 format
+  defp expires do
+    Calendar.DateTime.now_utc
+    |> Calendar.DateTime.add!(Application.get_env(:cdn, :expires_after))
+    |> Calendar.DateTime.Format.httpdate
   end
 end

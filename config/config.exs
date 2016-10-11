@@ -17,6 +17,8 @@ config :cdn,    bucket: "",
                   hidden: true
                 ],
                 acl: :public_read,
+                cache_control: "max-age=#{86400 * 30}",
+                expires_after: 86400 * 30,
                 cloudfront_url: "",
                 bypass: false
 
