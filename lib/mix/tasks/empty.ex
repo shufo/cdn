@@ -3,7 +3,7 @@ defmodule Mix.Tasks.Cdn.Empty do
 
   @shortdoc "Delete Assets in CDN"
 
-  def run(args) do
+  def run(_args) do
     {:ok, _} = Application.ensure_all_started(:ex_aws)
     {:ok, _} = Application.ensure_all_started(:httpoison)
 

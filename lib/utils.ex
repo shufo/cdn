@@ -27,7 +27,7 @@ defmodule Cdn.Utils do
 
     {{year, mon, day}, {hour, min, sec}}
     |> :calendar.datetime_to_gregorian_seconds
-    |> - :calendar.datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}})
+    |> Kernel.-(:calendar.datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}))
   end
 
   @doc """

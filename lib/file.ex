@@ -237,7 +237,7 @@ defmodule Cdn.File do
       {:ok, %File.Stat{mtime: mtime}} ->
         mtime
         |> :calendar.datetime_to_gregorian_seconds
-        |> - :calendar.datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}})
+        |> Kernel.-(:calendar.datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}))
       _ -> raise "stat error"
     end
   end
