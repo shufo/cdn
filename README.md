@@ -20,7 +20,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 1. Add cdn to your list of dependencies in `mix.exs`:
 
 ```elixir
-{:cdn, "~> 0.0.1"}
+{:cdn, "~> 0.0.4"}
 ```
 
 ## Configuration
