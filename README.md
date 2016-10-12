@@ -72,6 +72,8 @@ config :cdn,  bucket: "assets.foo",
                 hidden: true
               ],
               acl: :public_read,
+              cache_control: "max-age=#{86400 * 30}",
+              expires_after: 86400 * 30,
               cloudfront_url: "https://asset.s3.amazonaws.com",
               bypass: false
 ```
