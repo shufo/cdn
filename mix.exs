@@ -20,7 +20,7 @@ defmodule Cdn.Mixfile do
 
   defp deps do
     [
-      {:ex_aws,    "~> 0.4.10"},
+      {:ex_aws,    "~> 0.5.0"},
       {:poison,    "~> 1.2 or ~> 2.0"},
       {:httpoison, "~> 0.7"},
       {:sweet_xml, "~> 0.6.1"},
