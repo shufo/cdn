@@ -10,9 +10,10 @@ defmodule Cdn.S3 do
   """
   @spec list_files_already_on_bucket(binary) :: Keyword.t
   def list_files_already_on_bucket(bucket) do
-    case ExAws.S3.list_objects!(bucket) do
-      %{body: %{contents: contents}} ->
-        contents
+    case ExAws.S3.list_objects(bucket) |> ExAws.request do
+      {:ok, response} ->
+        response
+        |> get_in([:body, :contents])
         |> Enum.map(&({:"#{&1.key}", &1}))
         _ -> raise "List S3 files error"
     end
@@ -34,7 +35,7 @@ defmodule Cdn.S3 do
   """
   def put_object({_, asset}, bucket) do
     Logger.info "Uploading file path: #{asset.path}"
-    ExAws.S3.put_object!(bucket, asset.path, File.read!(asset.original), object_headers(asset.path))
+    ExAws.S3.put_object(bucket, asset.path, File.read!(asset.original), object_headers(asset.path)) |> ExAws.request
   end
 
   @doc ~S"""
@@ -78,10 +79,20 @@ defmodule Cdn.S3 do
   """
   def delete_objects(bucket) do
     Logger.info "#{blue}Deleting file from bucket...#{reset}"
+
     objects = all_objects(bucket)
+
     Enum.each(objects, &(Logger.info "Delete object key: #{&1}"))
-    {:ok, _} = ExAws.S3.delete_all_objects(bucket, objects)
+
+    objects
+    |> Enum.chunk(1000, 1000, [])
+    |> Enum.each(&delete_multiple_objects(bucket, &1))
+
     Logger.info "#{blue}Delete finished.#{reset}"
+  end
+
+  defp delete_multiple_objects(bucket, objects) do
+    ExAws.S3.delete_multiple_objects(bucket, objects) |> ExAws.request
   end
 
   @doc """
@@ -98,7 +109,7 @@ defmodule Cdn.S3 do
   """
   def delete_object(bucket, {_, asset}) do
     Logger.info "Deleting file path: #{asset.key}"
-    ExAws.S3.delete_object!(bucket, asset.key)
+    ExAws.S3.delete_object(bucket, asset.key) |> ExAws.request
   end
 
   @doc ~S"""
