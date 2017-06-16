@@ -21,7 +21,7 @@ defmodule Cdn.Mixfile do
   defp deps do
     [
       {:ex_aws,    "~> 1.0.0-rc.4"},
-      {:httpoison, "~> 0.9.2", optional: true},
+      {:httpoison, ">= 0.0.0", optional: true},
       {:sweet_xml, "~> 0.6", optional: true},
       {:ex_doc, "~> 0.12", only: :dev},
       {:mime, "~> 1.0"},
