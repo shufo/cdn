@@ -25,7 +25,7 @@ defmodule Cdn.Mixfile do
       {:sweet_xml, "~> 0.6", optional: true},
       {:ex_doc, "~> 0.12", only: :dev},
       {:mime, "~> 1.0"},
-      {:calendar, "~> 0.16.1"},
+      {:calendar, "~> 1.0.0"},
     ]
   end
 
