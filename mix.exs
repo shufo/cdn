@@ -1,11 +1,9 @@
 defmodule Cdn.Mixfile do
   use Mix.Project
 
-  @version "0.1.3"
-
   def project do
     [app: :cdn,
-     version: @version,
+     version: "0.1.5",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
