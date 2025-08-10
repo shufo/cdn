@@ -22,7 +22,7 @@ defmodule Cdn.Mixfile do
       {:httpoison, ">= 0.0.0", optional: true},
       {:sweet_xml, "~> 0.7", optional: true},
       {:ex_doc, "~> 0.28", only: :dev},
-      {:mime, "~> 1.0"},
+      {:mime, "~> 2.0"},
       {:calendar, "~> 0.16.1"},
     ]
   end
